@@ -70,4 +70,4 @@ int32_t count_vowels() {
   return 0;
 }
 
-int main() {}
+int main() { return count_vowels(); }
