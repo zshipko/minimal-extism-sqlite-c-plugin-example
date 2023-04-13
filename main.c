@@ -6,22 +6,21 @@
 
 // TODO: clean this up
 
-static const char dbbytes[] = {0/*redacted*/};
+static const char dbbytes[] = {0 /*redacted*/};
 
-int sqlite3_memvfs_init(
-  sqlite3 *db, 
-  char **pzErrMsg, 
-  const sqlite3_api_routines *pApi
-);
-int core_init(const char* dummy)
-{
-    int nErr = 0;
-    nErr += sqlite3_auto_extension((void *)sqlite3_memvfs_init);
-    return nErr ? SQLITE_ERROR : SQLITE_OK;
-}
+// int sqlite3_memvfs_init(
+//   sqlite3 *db,
+//   char **pzErrMsg,
+//   const sqlite3_api_routines *pApi
+// );
+// int core_init(const char* dummy)
+// {
+//     int nErr = 0;
+//     nErr += sqlite3_auto_extension((void *)sqlite3_memvfs_init);
+//     return nErr ? SQLITE_ERROR : SQLITE_OK;
+// }
 
-int32_t count_vowels()
-{
+int32_t count_vowels() {
   uint64_t length = extism_input_length();
   uint8_t *input = malloc(length);
   extism_load_input(input, length);
@@ -29,12 +28,11 @@ int32_t count_vowels()
   char out[128];
   int rc;
 
-  
-  char *memuri = sqlite3_mprintf("/path/to/your.db",
-                                 &dbbytes, sizeof(dbbytes));
+  // char *memuri = sqlite3_mprintf("/path/to/your.db",
+  //                                &dbbytes, sizeof(dbbytes));
 
   sqlite3 *db;
-
+  const char *memuri = "test.db";
   rc = sqlite3_open(memuri, &db);
   if (rc != SQLITE_OK) {
     int n = snprintf(out, 128, "open failed: %s\n", sqlite3_errmsg(db));
@@ -43,7 +41,7 @@ int32_t count_vowels()
     extism_output_set(offs_, n);
     return 0;
   }
-  //sqlite3_free(memuri);
+  // sqlite3_free(memuri);
 
   sqlite3_stmt *stmt;
   if (sqlite3_prepare_v2(db, "SELECT * FROM sqlite_schema", -1, &stmt, NULL) !=
@@ -56,8 +54,8 @@ int32_t count_vowels()
     return 0;
   }
 
-  //int n = snprintf(out, 128, "{\"count\": %lld}", count);
-  //int n = snprintf(out, 128, "input: %s", input);
+  // int n = snprintf(out, 128, "{\"count\": %lld}", count);
+  // int n = snprintf(out, 128, "input: %s", input);
 
   int n;
   n = snprintf(out, 128, "input: %s, uri=%s", input, memuri);
