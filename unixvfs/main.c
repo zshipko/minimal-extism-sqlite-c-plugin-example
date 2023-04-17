@@ -63,7 +63,7 @@ int32_t count_vowels() {
 
   sqlite3 *db;
 
-  rc = sqlite3_open("/path/to/test.db", &db);
+  rc = sqlite3_open("/path/to/your.db", &db);
   if (rc != SQLITE_OK) {
     // int n = snprintf(out, 128, "open failed: %s (log size: %d)\n",
     // sqlite3_errmsg(db), out_head-out_start);
